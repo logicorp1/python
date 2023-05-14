@@ -5,10 +5,8 @@ import ssl
 import smtplib
 
 
-
-
 app=Flask(__name__)
-CORS(app, origins=['https://www.logicorperu.com', 'https://logicorperu.com'])
+CORS(app, origins=['https://www.logicorperu.com/', 'https://logicorperu.com/'])
 
 @app.after_request
 def after_request(response):
@@ -31,7 +29,7 @@ def api_home():
 
 @app.route("/users", methods=["GET"])
 def get_users():
-    users = ["diego B"]
+    users = ["invitado"]
 
     if len(users) == 0:
         return {
@@ -51,15 +49,17 @@ def api_login():
             username = request.json.get("username")
             password = request.json.get("password")
 
-            user = "diego"
+            user = "logistic"
+            user1 = "Logistic"
 
-            if user == username:
-                if password == "12345678":
+            if user == username or user1 == username:
+                if password == "l0g1c0rp":
                     return {
                         "success": True,
                         "message": "Usuario autenticado correctamente",
                         "id": 1,
-                        "usuario": "diego",
+                        "usuario": "invitado",
+                        "token": 1,
                     }
                 else:
                     return {
@@ -83,11 +83,11 @@ def Correo():
         texto1 = request.json.get("texto")
 
         subject = 'Un nuevo usuario quiere contactarse contigo'
-        content = "holaa, el usuario " + nombre1 + " quiere contactarse contigo, su correo es: " + correo1 + ". \n el te envia esto: \n" + texto1
+        content = "holaa, el usuario " + nombre1 + "lleno el formulario de la pagina web, su correo es: " + correo1 + ". \n el o ella te envia este mensaje: \n" + texto1
 
         em = EmailMessage()
         em['From'] = user
-        em['To'] = correo1
+        em['To'] = "jfield@logicorperu.com"
         em['Subject'] = subject
         em.set_content(content)
 
@@ -95,7 +95,7 @@ def Correo():
 
         with smtplib.SMTP_SSL('smtp.gmail.com',465,context=context1) as smtp:
             smtp.login(user,app_password)
-            smtp.sendmail(user,correo1,em.as_string())
+            smtp.sendmail(user,"jfield@logicorperu.com",em.as_string())
         return jsonify({
             'success': True,
             'message': 'se envio el correo'
