@@ -75,8 +75,8 @@ def api_login():
 
 @app.route('/correo', methods=['POST'])
 def Correo():
-        user = 'dieg5206@gmail.com'
-        app_password = 'unppqmnkfckvtttq'
+        user = 'correo01321@gmail.com'
+        app_password = 'xwdsrpqihcxaefpz'
 
         correo1 = request.json.get("correo")
         nombre1 = request.json.get("nombre")
